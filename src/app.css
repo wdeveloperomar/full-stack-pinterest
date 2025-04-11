@@ -1,0 +1,11 @@
+.app {
+    width: 100%;
+    display: flex;
+    gap: 60px;
+}
+
+.content {
+    background-color: blueviolet;
+    flex: 1;
+    margin: 0 16px 0 0;
+}

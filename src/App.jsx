@@ -5,9 +5,9 @@ import Gallery from "./components/gallery/Gallery"
 
 const App = () => {
   return (
-    <div>
+    <div className='app'>
       <LeftBar></LeftBar>
-      <div>
+      <div className='content'>
         <TopBar></TopBar>
         <Gallery></Gallery>
       </div>
