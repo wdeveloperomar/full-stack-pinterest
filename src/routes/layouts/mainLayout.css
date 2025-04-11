@@ -1,0 +1,10 @@
+.app {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+}
+
+.content {
+    flex: 1;
+    margin: 0 16px 0 0;
+}

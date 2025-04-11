@@ -1,9 +1,10 @@
 import "./homePage.css"
+import Gallery from "../../components/gallery/Gallery"
 
 const HomePage = () => {
     return (
         <div className="homePage">
-            Home
+           <Gallery></Gallery>
         </div>
     );
 };
