@@ -2,8 +2,8 @@ import "./userButon.css"
 
 const UserButton = () => {
     return (
-        <div>
-            
+        <div className="userButton">
+            User
         </div>
     );
 };

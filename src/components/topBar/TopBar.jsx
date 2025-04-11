@@ -1,3 +1,4 @@
+import UserButton from "../userButton/UserButton";
 import "./topBar.css"
 
 const TopBar = () => {
@@ -9,6 +10,7 @@ const TopBar = () => {
                 <input type="text" name="" id="" placeholder="Search" />
            </div>
            {/* USER */}
+           <UserButton></UserButton>
         </div>
     );
 };
