@@ -1,7 +1,7 @@
 .app {
     width: 100%;
     display: flex;
-    gap: 60px;
+    gap: 24px;
 }
 
 .content {
