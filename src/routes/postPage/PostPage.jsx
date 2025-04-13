@@ -1,10 +1,24 @@
 import "./postPage.css";
 import Image from "../../components/image/Image";
 import PostInteraction from "../../components/postInteraction/PostInteraction";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import Comments from "../../components/comments/Comments";
+import {useQuery} from "@tanstack/react-query"
+import apiRequest from "../../utils/apiRequest";
 
 const PostPage = () => {
+
+  const {id} = useParams()
+
+const {isPending, error, data} = useQuery({
+  queryKey:["pin", id],
+  queryFn:() => apiRequest.get(`/pins/${id}`).then((res)=> res.data)
+})
+
+if (isPending) return "Loading..."
+if(error) return "An error has occured" + error.message
+if(!data) return "Pin not found"
+
   return (
     <div className="postPage">
       <svg
@@ -27,13 +41,13 @@ const PostPage = () => {
       </svg>
       <div className="postContainer">
         <div className="postImg">
-          <Image path="/pins/pin1.jpeg" alt="" w={736}></Image>
+          <Image src={data?.media} alt="" w={736}></Image>
         </div>
         <div className="postDetails">
           <PostInteraction></PostInteraction>
-          <Link to="/omar" className="postUser">
-            <Image path="/general/noAvatar.png"></Image>
-            <span>Omar Faruk</span>
+          <Link to={`/${data?.user?.username}`} className="postUser">
+            <Image src={data?.user?.img || "/general/noAvatar.png"}></Image>
+            <span>{data?.user?.username}</span>
           </Link>
           <Comments></Comments>
         </div>

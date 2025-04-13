@@ -5,17 +5,17 @@ import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
   
-  const fetchPins = async ({pageParam}) => {
-    const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/pins?cursor=${pageParam}`)
+  const fetchPins = async ({pageParam, search}) => {
+    const res = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/pins?cursor=${pageParam || ""}&search=${search || ""}`)
     return res.data
 }
 
-const Gallery = () => {
+const Gallery = ({search}) => {
 
 
     const {data, fetchNextPage, hasNextPage, status} = useInfiniteQuery({ 
         queryKey: ['pins'], 
-        queryFn: fetchPins,
+        queryFn: ({pageParam=0}) => fetchPins(pageParam, search),
         initialPageParam:0,
         getNextPageParam:(lastPage, pages) => lastPage.nextCursor,
      })
