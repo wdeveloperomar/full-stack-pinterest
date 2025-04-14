@@ -21,7 +21,7 @@ const Comments = ({id}) => {
     return (
         <div className="comments">
             <div className="commentList">
-                <span className="commentCount">{data.length} Comments</span>
+                <span className="commentCount">{data.length === 0 ? "No comments" : data.length + "comments"}</span>
                 {/* Comment */}
                 {
                     data.map((comment, index) =>(
