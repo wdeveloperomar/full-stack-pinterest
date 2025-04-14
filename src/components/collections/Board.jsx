@@ -3,6 +3,7 @@ import Image from "../image/Image"
 import { useQuery } from "@tanstack/react-query";
 import apiRequest from "../../utils/apiRequest";
 import {format} from "timeago.js"
+import { Link } from "react-router";
 
 const Board = ({userId}) => {
 
@@ -22,13 +23,14 @@ const Board = ({userId}) => {
             {/* collections */}
             {
                 data.map((board) => (
-                    <div className="collection" key={board._id}>
+                    <Link to={`/search?boardId=${board._id}`} className="collection" key={board._id}>
+                        
                     <Image src={board.firstPin.media} alt=""></Image>
                     <div className="collectionInfo">
                         <h1>{board.title}</h1>
                         <span>{board.pinCount} . {format(board.createdAt)}</span>
                     </div>
-                </div>
+                </Link>
                 ))
             }
         </div>

@@ -1,47 +1,33 @@
 import "./comments.css"
-import Image from "../image/Image"
 import EmojiPicker from 'emoji-picker-react';
 import { useState } from "react";
+import {useQuery} from "@tanstack/react-query"
+import apiRequest from "../../utils/apiRequest";
+import Comment from "./Comment";
 
 
 
-const Comments = () => {
+const Comments = ({id}) => {
     const [open, setOpen] = useState(false)
+    const {isPending, error, data} = useQuery({
+        queryKey:["comments", id],
+        queryFn:() => apiRequest.get(`/comments/${id}`).then((res)=> res.data)
+      })
+      
+      if (isPending) return "Loading..."
+      if(error) return "An error has occured" + error.message
+      if(!data) return "Comment not found"
+
     return (
         <div className="comments">
             <div className="commentList">
-                <span className="commentCount">5 comments</span>
+                <span className="commentCount">{data.length} Comments</span>
                 {/* Comment */}
-                <div className="comment">
-                    <Image path="/general/noAvatar.png" alt=""></Image>
-                    <div className="commentContent">
-                        <span className="commentUserName">Omar Faruk</span>
-                        <p className="commentText">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        <span className="commentTime">
-                            1h
-                        </span>
-                    </div>
-                </div>
-                <div className="comment">
-                    <Image path="/general/noAvatar.png" alt=""></Image>
-                    <div className="commentContent">
-                        <span className="commentUserName">Omar Faruk</span>
-                        <p className="commentText">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        <span className="commentTime">
-                            1h
-                        </span>
-                    </div>
-                </div>
-                <div className="comment">
-                    <Image path="/general/noAvatar.png" alt=""></Image>
-                    <div className="commentContent">
-                        <span className="commentUserName">Omar Faruk</span>
-                        <p className="commentText">Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-                        <span className="commentTime">
-                            1h
-                        </span>
-                    </div>
-                </div>
+                {
+                    data.map((comment, index) =>(
+                        <Comment key={index} comment={comment}></Comment>
+                    ))
+                }
             </div>
             <form className="commentForm">
                 <input type="text" name="" id="" placeholder="Add a comment"/>

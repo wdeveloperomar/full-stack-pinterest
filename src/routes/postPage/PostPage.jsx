@@ -49,7 +49,7 @@ if(!data) return "Pin not found"
             <Image src={data?.user?.img || "/general/noAvatar.png"}></Image>
             <span>{data?.user?.username}</span>
           </Link>
-          <Comments></Comments>
+          <Comments id={data._id}></Comments>
         </div>
       </div>
     </div>

@@ -7,10 +7,11 @@ const SearchPage = () => {
     let [searchParams] = useSearchParams()
 
     const search = searchParams.get("search")
+    const boardId = searchParams.get("boardId")
 
     return (
         <div  className='searchPage'>
-            <Gallery search={search}></Gallery>
+            <Gallery search={search} boardId={boardId}></Gallery>
         </div>
     );
 };
