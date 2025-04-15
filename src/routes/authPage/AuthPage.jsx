@@ -1,11 +1,15 @@
 import "./authPage.css";
 import Image from "../../components/image/Image"
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import apiRequest from "../../utils/apiRequest"
+
 
 const AuthPage = () => {
     const [isRegister, setIsRegister] = useState(false)
     const [error, setError] = useState("")
+
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,7 +18,7 @@ const AuthPage = () => {
       
         try {
             const res = await apiRequest.post(`/users/auth/${isRegister ? "register" : "login"}`,data)
-            console.log(res.data)
+            navigate("/")
         }catch(err) {
             setError(err.response.data.message)
         }
