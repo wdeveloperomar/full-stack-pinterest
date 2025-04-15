@@ -3,7 +3,7 @@ import "./userButon.css"
 import Image from "../image/Image";
 
 const UserButton = () => {
-    const [open, setOpen] = useState()
+    const [open, setOpen] = useState(false)
     // TEMP
     const currentUser = true
     return  currentUser ? (
