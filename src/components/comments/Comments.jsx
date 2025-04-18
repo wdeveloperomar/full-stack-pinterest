@@ -28,7 +28,7 @@ const Comments = ({id}) => {
                     ))
                 }
             </div>
-            <CommnetForm></CommnetForm>
+            <CommnetForm id={id}></CommnetForm>
         </div>
     );
 };
